@@ -18,7 +18,10 @@
 </head>
 <body>
   <nav class="topplinje">
-    <a class="tilbake" href="../../">← Alle dikt</a>
+    <div class="lenkjer">
+      <a class="tilbake" href="../../">← Alle dikt</a>
+      <a class="tilbake" href="../../les/#da-eg-var-liten">Rein tekst</a>
+    </div>
     <div class="veljar" role="group" aria-label="Visning">
       <button type="button" data-vel="skrivebok" aria-pressed="true">Skrivebok</button>
       <button type="button" data-vel="glidar" aria-pressed="false">Før og etter</button>
@@ -52,7 +55,7 @@
       </g>
     </svg>
 
-    <div class="scene" style="--pos: 100%">
+    <div data-strofe class="scene" style="--pos: 100%">
       <div class="panel panel-da">
         <svg class="bilete" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <defs>
@@ -94,8 +97,8 @@
           </g>
         </svg>
         <p class="del del-da">
-          <span class="linje">Då eg var liten og lite visste</span>
-          <span class="linje">eg låg og runka bak bjørkekviste</span>
+          <span data-linje class="linje">Då eg var liten og lite visste</span>
+          <span data-linje class="linje">eg låg og runka bak bjørkekviste</span>
         </p>
       </div>
 
@@ -148,8 +151,8 @@
           <path d="M560 360 V400 M610 362 V402 M660 364 V404 M710 366 V406 M760 368 V408 M550 372 H780 M550 390 H780" stroke="#4a3a2a" stroke-width="6" stroke-linecap="round"/>
         </svg>
         <p class="del del-no">
-          <span class="linje"><span class="rett" data-rett="No!">Nu</span> er eg eldre og <span class="rett" data-rett="betre!">bedre</span> veit</span>
-          <span class="linje">Eg gjeng i fjøset og tek ei geit</span>
+          <span data-linje class="linje"><span class="rett" data-rett="No!">Nu</span> er eg eldre og <span class="rett" data-rett="betre!">bedre</span> veit</span>
+          <span data-linje class="linje">Eg gjeng i fjøset og tek ei geit</span>
         </p>
       </div>
 

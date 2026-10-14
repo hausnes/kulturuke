@@ -475,3 +475,9 @@ body {
     transition: none !important;
   }
 }
+
+/* Lenkjene «Alle dikt» og «Rein tekst» side om side */
+.lenkjer {
+  display: flex;
+  gap: 1rem;
+}

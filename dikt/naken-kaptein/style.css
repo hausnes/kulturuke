@@ -467,3 +467,9 @@ h1 {
     transition: none !important;
   }
 }
+
+/* «Rein tekst» øvst til høgre */
+.reintekst {
+  left: auto;
+  right: 1rem;
+}

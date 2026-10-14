@@ -313,3 +313,9 @@ h1 {
     transform: scaleY(0.5);
   }
 }
+
+/* «Rein tekst» øvst til høgre */
+.reintekst {
+  left: auto;
+  right: 1rem;
+}

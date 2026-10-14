@@ -1,0 +1,142 @@
+/* Rein tekst: roleg og lettlesen, og følgjer lyst eller mørkt tema frå eininga */
+
+:root {
+  --bakgrunn: #fbf8f2;
+  --tekst: #24211d;
+  --dempet: #6f675d;
+  --strek: #e3dccf;
+  --lenke: #8a4b14;
+
+  --serif: "Literata", Georgia, serif;
+  --ui: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bakgrunn: #161412;
+    --tekst: #e9e3d8;
+    --dempet: #a39a8d;
+    --strek: #34302b;
+    --lenke: #e0a458;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bakgrunn);
+  color: var(--tekst);
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.topp,
+main {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.topp {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--strek);
+}
+
+a {
+  color: var(--lenke);
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.tilbake,
+.stilsett {
+  font-family: var(--ui);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.tilbake:hover,
+.stilsett:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  margin: 1.5rem 0 0.25rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.ingress {
+  margin: 0;
+  color: var(--dempet);
+  font-style: italic;
+}
+
+.innhald {
+  margin: 1.5rem 0 0;
+  padding-left: 1.4rem;
+  font-size: 1rem;
+}
+
+.innhald li {
+  margin: 0.2rem 0;
+  color: var(--dempet);
+}
+
+.dikt {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--strek);
+  scroll-margin-top: 1rem;
+}
+
+.dikt h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.forfatter {
+  margin: 0.2rem 0 1.5rem;
+  color: var(--dempet);
+  font-style: italic;
+}
+
+.strofe {
+  margin: 0 0 1.2em;
+}
+
+.stilsett {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.melding {
+  color: var(--dempet);
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+@media print {
+  .tilbake,
+  nav,
+  .stilsett {
+    display: none;
+  }
+
+  .dikt {
+    break-inside: avoid;
+  }
+}
