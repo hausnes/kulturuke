@@ -27,7 +27,7 @@ les/                               Alle dikta som rein tekst (hentar teksten frÃ
 }
 ```
 
-Nye kategoriar dukkar opp i filteret automatisk. Vil du gi ein kategori eigen farge, legg du han til i `style.css`.
+Nye kategoriar dukkar opp i filteret automatisk. Vil du gje ein kategori eigen farge, legg du han til i `style.css`.
 
 ### Merk teksten for rein tekst-visninga
 
