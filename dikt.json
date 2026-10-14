@@ -1,0 +1,32 @@
+[
+  {
+    "tittel": "Sverre med fingen",
+    "forfatter": "Jon Hjørnevik",
+    "kategorier": ["humor", "griseri"],
+    "mappe": "sverre-med-fingen"
+  },
+  {
+    "tittel": "Me er ikkje like",
+    "forfatter": "Arne Hjeltnes",
+    "kategorier": ["humor", "livsvisdom"],
+    "mappe": "me-er-ikkje-like"
+  },
+  {
+    "tittel": "Då eg var liten",
+    "forfatter": "Arne Hjeltnes",
+    "kategorier": ["griseri", "humor"],
+    "mappe": "da-eg-var-liten"
+  },
+  {
+    "tittel": "Naken kaptein",
+    "forfatter": "Jon Hjørnevik",
+    "kategorier": ["griseri", "humor"],
+    "mappe": "naken-kaptein"
+  },
+  {
+    "tittel": "Moderne vossastubb",
+    "forfatter": "Anonym",
+    "kategorier": ["humor", "livsvisdom"],
+    "mappe": "moderne-vossastubb"
+  }
+]

@@ -1,0 +1,38 @@
+/* Kvart dikt har si eiga style.css – her kan du eksperimentere fritt. */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: #121014;
+  color: #ece6dc;
+  font-family: Georgia, serif;
+  line-height: 1.7;
+}
+
+.tilbake {
+  color: #e0a458;
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+article {
+  max-width: 32rem;
+  margin: 3rem auto;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.forfatter {
+  margin-top: 0.25rem;
+  font-style: italic;
+  color: #9a9199;
+}
+
+.dikt p {
+  margin: 1.5rem 0;
+}

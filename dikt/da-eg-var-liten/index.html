@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="nn" data-visning="skrivebok">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Då eg var liten og lite visste... – Arne Hjeltnes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Gochi+Hand&family=Zilla+Slab:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      if (localStorage.getItem("liten-visning") === "glidar") document.documentElement.dataset.visning = "glidar";
+    } catch {}
+  </script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <nav class="topplinje">
+    <a class="tilbake" href="../../">← Alle dikt</a>
+    <div class="veljar" role="group" aria-label="Visning">
+      <button type="button" data-vel="skrivebok" aria-pressed="true">Skrivebok</button>
+      <button type="button" data-vel="glidar" aria-pressed="false">Før og etter</button>
+    </div>
+  </nav>
+
+  <main class="ark">
+    <header class="hovud">
+      <h1>Då eg var liten</h1>
+      <p class="forfatter">Arne Hjeltnes</p>
+    </header>
+
+    <!-- Barneteikning i margen på skrivebokssida -->
+    <svg class="krusedull" viewBox="0 0 160 200" aria-hidden="true">
+      <defs>
+        <filter id="fargeblyant-liten">
+          <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="2" result="stoy"/>
+          <feDisplacementMap in="SourceGraphic" in2="stoy" scale="3"/>
+        </filter>
+      </defs>
+      <g filter="url(#fargeblyant-liten)">
+        <circle class="dull-sol" cx="125" cy="32" r="18"/>
+        <path class="dull-strek" d="M125 6 V0 M147 14 L153 8 M151 32 H158 M103 14 L97 8"/>
+        <path class="dull-strek" d="M118 30 h1 M131 30 h1 M118 38 Q125 44 132 38"/>
+        <circle class="dull-krone" cx="62" cy="70" r="30"/>
+        <circle class="dull-krone" cx="42" cy="88" r="22"/>
+        <circle class="dull-krone" cx="84" cy="90" r="22"/>
+        <rect class="dull-stamme" x="54" y="92" width="14" height="88"/>
+        <path class="dull-strek" d="M54 110 h6 M62 128 h6 M54 146 h7 M61 162 h7"/>
+        <path class="dull-gras" d="M4 182 Q 80 168 156 184 L156 200 L4 200 Z"/>
+      </g>
+    </svg>
+
+    <div class="scene" style="--pos: 100%">
+      <div class="panel panel-da">
+        <svg class="bilete" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <filter id="fargeblyant">
+              <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="stoy"/>
+              <feDisplacementMap in="SourceGraphic" in2="stoy" scale="6"/>
+            </filter>
+          </defs>
+          <rect width="800" height="500" fill="#fffdf4"/>
+          <g filter="url(#fargeblyant)">
+            <rect class="da-himmel" x="-10" y="-10" width="820" height="390"/>
+            <circle class="dull-sol" cx="560" cy="90" r="46"/>
+            <path class="dull-strek tjukk" d="M560 22 V4 M614 44 L630 28 M626 92 H646 M506 44 L490 28 M614 140 L630 156 M506 140 L490 156"/>
+            <path class="dull-strek tjukk" d="M544 84 h2 M574 84 h2 M542 104 Q560 120 578 104"/>
+            <path class="da-sky" d="M120 360 q-30 0 -30 -26 q0 -26 30 -24 q10 -26 40 -16 q30 -14 46 14 q30 2 26 30 q-4 22 -30 22 Z" transform="translate(500 -240)"/>
+            <path class="dull-gras" d="M-10 380 Q 200 330 420 370 T 820 360 L 820 510 L -10 510 Z"/>
+
+            <rect class="dull-stamme" x="318" y="200" width="24" height="190"/>
+            <path class="dull-strek tjukk" d="M318 230 h10 M332 262 h10 M318 300 h12 M330 336 h12"/>
+            <circle class="dull-krone" cx="330" cy="170" r="62"/>
+            <circle class="dull-krone" cx="286" cy="208" r="40"/>
+            <circle class="dull-krone" cx="376" cy="206" r="42"/>
+
+            <rect class="dull-stamme" x="458" y="230" width="20" height="160"/>
+            <path class="dull-strek tjukk" d="M458 262 h9 M469 296 h9 M458 330 h10"/>
+            <circle class="dull-krone" cx="468" cy="206" r="50"/>
+            <circle class="dull-krone" cx="434" cy="236" r="32"/>
+            <circle class="dull-krone" cx="504" cy="234" r="34"/>
+
+            <!-- Bjørkekvistar -->
+            <circle class="da-busk" cx="190" cy="390" r="44"/>
+            <circle class="da-busk" cx="240" cy="380" r="36"/>
+            <circle class="da-busk" cx="150" cy="404" r="30"/>
+
+            <circle class="da-blom" cx="420" cy="430" r="8"/>
+            <circle class="da-blom" cx="560" cy="414" r="8"/>
+            <circle class="da-blom gul" cx="620" cy="446" r="8"/>
+            <circle class="da-blom gul" cx="90" cy="452" r="8"/>
+          </g>
+        </svg>
+        <p class="del del-da">
+          <span class="linje">Då eg var liten og lite visste</span>
+          <span class="linje">eg låg og runka bak bjørkekviste</span>
+        </p>
+      </div>
+
+      <div class="panel panel-no">
+        <svg class="bilete" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="kveldshimmel" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1f1733"/>
+              <stop offset="0.5" stop-color="#6b3355"/>
+              <stop offset="0.78" stop-color="#d9784f"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="500" fill="url(#kveldshimmel)"/>
+          <circle cx="620" cy="80" r="22" fill="#f6ecd2"/>
+          <g class="stjerner">
+            <circle cx="120" cy="50" r="1.6"/>
+            <circle cx="220" cy="100" r="1.2"/>
+            <circle cx="460" cy="40" r="1.4"/>
+            <circle cx="700" cy="140" r="1.2"/>
+            <circle cx="340" cy="70" r="1"/>
+          </g>
+          <path d="M0 380 Q 300 350 800 372 L800 500 L0 500 Z" fill="#26301e"/>
+
+          <!-- Fjøset -->
+          <path d="M240 250 L380 160 L520 250 Z" fill="#2e2a2a"/>
+          <rect x="256" y="248" width="248" height="140" fill="#9e2b25"/>
+          <path d="M256 248 H504" stroke="#f2ede4" stroke-width="5"/>
+          <rect x="366" y="194" width="28" height="26" fill="#f2ede4"/>
+          <rect x="370" y="198" width="20" height="18" fill="#f3c46b"/>
+          <rect x="430" y="280" width="44" height="34" fill="#f3c46b" stroke="#f2ede4" stroke-width="4"/>
+          <!-- Fjøsdøra, halvopen -->
+          <rect x="290" y="290" width="70" height="98" fill="#1b1414"/>
+          <rect x="360" y="290" width="40" height="98" fill="#9e2b25" stroke="#f2ede4" stroke-width="4"/>
+          <path d="M360 290 L400 388 M400 290 L360 388" stroke="#f2ede4" stroke-width="4"/>
+
+          <!-- Geita som kikar ut -->
+          <g class="geit">
+            <path class="geit-horn" d="M318 322 Q 306 296 296 300 M334 322 Q 340 296 352 298"/>
+            <ellipse class="geit-ore" cx="304" cy="334" rx="12" ry="5" transform="rotate(20 304 334)"/>
+            <ellipse class="geit-ore" cx="350" cy="334" rx="12" ry="5" transform="rotate(-20 350 334)"/>
+            <ellipse class="geit-hovud" cx="327" cy="345" rx="20" ry="26"/>
+            <g class="geit-auge">
+              <ellipse cx="319" cy="340" rx="3.4" ry="4"/>
+              <ellipse cx="335" cy="340" rx="3.4" ry="4"/>
+            </g>
+            <path class="geit-skjegg" d="M321 368 L327 388 L333 368 Z"/>
+          </g>
+
+          <!-- Gjerde -->
+          <path d="M560 360 V400 M610 362 V402 M660 364 V404 M710 366 V406 M760 368 V408 M550 372 H780 M550 390 H780" stroke="#4a3a2a" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <p class="del del-no">
+          <span class="linje"><span class="rett" data-rett="No!">Nu</span> er eg eldre og <span class="rett" data-rett="betre!">bedre</span> veit</span>
+          <span class="linje">Eg gjeng i fjøset og tek ei geit</span>
+        </p>
+      </div>
+
+      <div class="skiljeline" aria-hidden="true"></div>
+      <button type="button" class="handtak" role="slider" aria-label="Dra mellom då og no" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+        <span aria-hidden="true">⟷</span>
+      </button>
+    </div>
+
+    <!-- Læraren sin dom (skrivebok) -->
+    <p class="karakter">Ikkje godkjent.<br>Dette tek me opp på foreldremøtet.</p>
+  </main>
+</body>
+</html>

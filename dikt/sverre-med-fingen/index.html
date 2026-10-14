@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="nn" data-visning="vise">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sverre med fingen – Jon Hjørnevik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,800;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      if (localStorage.getItem("sverre-visning") === "veg") document.documentElement.dataset.visning = "veg";
+    } catch {}
+  </script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <nav class="topplinje">
+    <a class="tilbake" href="../../">← Alle dikt</a>
+    <div class="veljar" role="group" aria-label="Visning">
+      <button type="button" data-vel="vise" aria-pressed="true">Skillingsvise</button>
+      <button type="button" data-vel="veg" aria-pressed="false">Ned bygda</button>
+    </div>
+  </nav>
+
+  <main class="ark">
+    <svg class="vegen" aria-hidden="true">
+      <defs>
+        <symbol id="gran" viewBox="0 0 40 60">
+          <path d="M20 0 L34 22 L27 22 L38 40 L29 40 L40 56 L0 56 L11 40 L2 40 L13 22 L6 22 Z"/>
+          <rect x="17" y="54" width="6" height="6"/>
+        </symbol>
+      </defs>
+      <g class="granar"></g>
+      <path class="veg-kant"/>
+      <path class="veg-sti"/>
+    </svg>
+
+    <header class="hovud">
+      <svg class="hus" viewBox="0 0 120 90" aria-hidden="true">
+        <path class="hus-tak" d="M8 42 L60 8 L112 42 Z"/>
+        <rect class="hus-vegg" x="18" y="40" width="84" height="46"/>
+        <rect class="hus-vindauge" x="30" y="52" width="16" height="14"/>
+        <rect class="hus-vindauge" x="74" y="52" width="16" height="14"/>
+        <rect class="hus-dør" x="52" y="58" width="16" height="28"/>
+      </svg>
+      <p class="undertittel">Ei ganske ny og sørgjeleg Vise om Spelmannen Sverre, hans fingernemme Kunst og hans brå Endelikt</p>
+      <h1>Sverre med fingen</h1>
+      <p class="forfatter">av Jon Hjørnevik</p>
+      <p class="melodi">Å syngje som: «Kjend Melodi»</p>
+    </header>
+
+    <div class="strofer">
+      <p class="strofe">
+        Heilt øverst i bygda,<br>
+        i den krappaste svingen,<br>
+        budde ungkar og spelmann,<br>
+        <span class="peik">han Sverre med fingen.</span>
+      </p>
+      <p class="strofe">
+        Både kvinnfolk og trekkspel<br>
+        har krevande knappar.<br>
+        men han Sverre var flittig<br>
+        <span class="peik">med alle slags tappar.</span>
+      </p>
+      <p class="strofe">
+        Der menige menn<br>
+        brukte kåtskap og brunst<br>
+        kom Sverre med list<br>
+        <span class="peik">og fingernem kunst.</span>
+      </p>
+      <p class="strofe">
+        Han Sverre fekk navnet<br>
+        fordi jentene tykte<br>
+        at fingen hans Sverre<br>
+        <span class="peik">levde opp til sitt rykte.</span>
+      </p>
+      <p class="strofe blod">
+        Men mannfolk i bygda<br>
+        frå bonde til presten,<br>
+        ville Sverre til livs<br>
+        og kjeppjaga pesten.
+      </p>
+      <p class="strofe blod">
+        Det vart svart sjalusi<br>
+        og blodhevn dessverre<br>
+        og snart var han Sverre<br>
+        på veg til Vår Herre.
+      </p>
+      <p class="strofe sorg">
+        I Sverre si gravferd<br>
+        ved alterringen,<br>
+        grein flokken med jenter<br>
+        <span class="peik">for Sverre med fingen.</span>
+      </p>
+      <p class="strofe siste">
+        Der stod presten fornerma,<br>
+        ved bygdas profet,<br>
+        for også kona til presten,<br>
+        var i flokken som gret.
+      </p>
+    </div>
+
+    <footer class="fot">
+      <div class="stempel" aria-hidden="true">Skandale!</div>
+      <svg class="kyrkje" viewBox="0 0 160 150" aria-hidden="true">
+        <path class="kyrkje-tak" d="M20 80 L80 52 L140 80 Z"/>
+        <rect class="kyrkje-vegg" x="28" y="78" width="104" height="68"/>
+        <rect class="kyrkje-vegg" x="64" y="30" width="32" height="50"/>
+        <path class="kyrkje-tak" d="M60 32 L80 0 L100 32 Z"/>
+        <rect class="kyrkje-vindauge" x="74" y="44" width="12" height="18" rx="6"/>
+        <rect class="kyrkje-vindauge" x="40" y="96" width="14" height="24" rx="7"/>
+        <rect class="kyrkje-vindauge" x="106" y="96" width="14" height="24" rx="7"/>
+        <rect class="kyrkje-dør" x="70" y="112" width="20" height="34" rx="10"/>
+      </svg>
+      <p class="prenta">Prenta og selt på marknaden · Pris: 1 skilling</p>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,469 @@
+/* Naken kaptein – ei sjøreise i fem tilstandar.
+   Scena les data-scene på <html> (1–5), som script.js set etter kva strofe som blir lesen. */
+
+:root {
+  --djup: #0d1830;
+  --tekst: #e6edf5;
+  --dempet: #8fa3bd;
+
+  /* Standard: roleg kveldshav */
+  --sjo-bak: #2b3a66;
+  --sjo-fram: #1d2a4f;
+  --duv: 1;            /* kor mykje skipet krengjer, i grader */
+  --duv-tid: 5s;
+  --bolgje-hogd: 1;
+  --bolgje-tid: 9s;
+
+  --bodoni: "Bodoni Moda", Georgia, serif;
+  --crimson: "Crimson Pro", Georgia, serif;
+}
+
+[data-scene="3"] {
+  --sjo-bak: #2d4a63;
+  --sjo-fram: #1f3550;
+  --duv: 3;
+  --duv-tid: 2.4s;
+  --bolgje-hogd: 1.6;
+  --bolgje-tid: 4s;
+}
+
+[data-scene="4"] {
+  --sjo-bak: #3a474f;
+  --sjo-fram: #222d35;
+  --duv: 5;
+  --duv-tid: 1.8s;
+  --bolgje-hogd: 2.2;
+  --bolgje-tid: 2.8s;
+}
+
+[data-scene="5"] {
+  --sjo-bak: #3f7393;
+  --sjo-fram: #2c5a78;
+  --duv: 1;
+  --duv-tid: 6s;
+  --bolgje-hogd: 0.9;
+  --bolgje-tid: 11s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--djup);
+  color: var(--tekst);
+  font-family: var(--crimson);
+}
+
+.tilbake {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 5;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+  text-decoration: none;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.tilbake:focus-visible,
+.slutt a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   Scena
+   ========================================================= */
+
+.scene {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 55vh;
+  min-height: 260px;
+  overflow: hidden;
+}
+
+/* Glir over i djuphavet under */
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 18%;
+  background: linear-gradient(transparent, var(--djup));
+}
+
+.scene svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.himmel {
+  position: absolute;
+  inset: 0;
+  transition: opacity 2s ease;
+}
+
+.himmel-kveld {
+  background: linear-gradient(#1c2350 0%, #5b3b6e 35%, #e07a5f 55%, #f4b26a 65%);
+}
+
+.himmel-storm {
+  opacity: 0;
+  background: linear-gradient(#1b2127 0%, #3f4a54 45%, #66717b 65%);
+}
+
+.himmel-morgon {
+  opacity: 0;
+  background: linear-gradient(#7fb7d9 0%, #cfe6ef 45%, #fde7c4 62%);
+}
+
+[data-scene="3"] .himmel-storm { opacity: 0.55; }
+[data-scene="4"] .himmel-storm { opacity: 1; }
+[data-scene="5"] .himmel-morgon { opacity: 1; }
+
+.sol {
+  transition: opacity 2s ease;
+}
+
+.sol-kveld { fill: #ffb86b; }
+.sol-morgon { fill: #fff3c4; opacity: 0; }
+
+[data-scene="3"] .sol-kveld { opacity: 0.3; }
+[data-scene="4"] .sol-kveld,
+[data-scene="5"] .sol-kveld { opacity: 0; }
+[data-scene="5"] .sol-morgon { opacity: 1; }
+
+/* ---------- Havet ---------- */
+
+.bolgjer {
+  transform-box: view-box;
+  transform: scaleY(var(--bolgje-hogd));
+  transition: transform 2s ease;
+}
+
+.bolgjer-bak { transform-origin: 0 252px; }
+.bolgjer-fram { transform-origin: 0 304px; }
+
+.bolgjer path {
+  transition: fill 2s ease;
+  animation: flyt var(--bolgje-tid) linear infinite;
+}
+
+.bolgjer-bak path {
+  fill: var(--sjo-bak);
+  --periode: -200px;
+}
+
+.bolgjer-fram path {
+  fill: var(--sjo-fram);
+  --periode: -160px;
+}
+
+.glitter rect {
+  fill: #ffd9a0;
+  animation: blink 1.6s ease-in-out infinite alternate;
+}
+
+.glitter rect:nth-child(2) { animation-delay: 0.5s; }
+.glitter rect:nth-child(3) { animation-delay: 1s; }
+
+.glitter {
+  transition: opacity 2s ease;
+}
+
+[data-scene="3"] .glitter,
+[data-scene="4"] .glitter,
+[data-scene="5"] .glitter {
+  opacity: 0;
+}
+
+/* ---------- Skipet ---------- */
+
+.skip-snu {
+  transform-box: view-box;
+  transform-origin: 424px 290px;
+  transition: transform 3s ease-in-out;
+}
+
+/* Strofe 5: skipet snur og syner hekken */
+[data-scene="5"] .skip-snu {
+  transform: scaleX(-1);
+}
+
+.skip {
+  transform-box: view-box;
+  transform-origin: 420px 300px;
+  animation: duv var(--duv-tid) ease-in-out infinite alternate;
+}
+
+.skrog { fill: #7a1f1f; }
+.rekke { stroke: #e9e4da; stroke-width: 3; }
+.styrhus { fill: #e9e4da; }
+.styrhus-vindauge { fill: #2c3e50; }
+.mast-stong { fill: #3b2a20; }
+.vimpel { fill: #c0392b; }
+.segl { fill: #f4ecd8; }
+.kaptein { fill: #14141f; }
+.lue { fill: #f4ecd8; }
+.lykt-stong { fill: #3b2a20; }
+
+/* Baugporten står open (løfta) fram til strofe 4 */
+.baugport {
+  fill: #8e2626;
+  transform-box: view-box;
+  transform-origin: 542px 268px;
+  transform: rotate(-32deg);
+  transition: transform 0.6s cubic-bezier(.6, 0, .9, .5);
+}
+
+[data-scene="4"] .baugport,
+[data-scene="5"] .baugport {
+  transform: none;
+}
+
+/* Masta ligg nede i strofe 1, reiser seg i 2, og ramlar i 4 */
+.mast {
+  transform-box: view-box;
+  transform-origin: 433px 270px;
+  transform: rotate(-82deg);
+  transition: transform 2.2s cubic-bezier(.3, .7, .3, 1.15);
+}
+
+[data-scene="2"] .mast,
+[data-scene="3"] .mast {
+  transform: none;
+}
+
+[data-scene="4"] .mast,
+[data-scene="5"] .mast {
+  transform: rotate(80deg);
+  transition: transform 1s cubic-bezier(.55, 0, 1, .45);
+}
+
+/* Seglet går opp i strofe 3 */
+.segl {
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  transition: transform 1.5s ease;
+}
+
+[data-scene="3"] .segl,
+[data-scene="4"] .segl,
+[data-scene="5"] .segl {
+  transform: none;
+}
+
+/* Kapteinen sig saman når masta ramlar */
+.kaptein {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: transform 1s ease;
+}
+
+[data-scene="4"] .kaptein {
+  transform: scaleY(0.82);
+}
+
+/* Sjøsprut over baugen i strofe 3 */
+.sprut {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+[data-scene="3"] .sprut {
+  opacity: 1;
+}
+
+.sprut circle {
+  fill: #fff;
+  transform-box: fill-box;
+  animation: sprut 1.1s ease-out infinite;
+}
+
+.sprut circle:nth-child(2) { animation-delay: 0.25s; }
+.sprut circle:nth-child(3) { animation-delay: 0.5s; }
+.sprut circle:nth-child(4) { animation-delay: 0.75s; }
+.sprut circle:nth-child(5) { animation-delay: 0.9s; }
+
+/* Lykta på hekken blir tend i strofe 5 – håp i ein hekk */
+.lykt {
+  fill: #3a3a3a;
+  transition: fill 1.5s ease 2s;
+}
+
+.lykt-skin {
+  fill: #ffcf6b;
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 1.5s ease 2s;
+}
+
+[data-scene="5"] .lykt { fill: #ffcf6b; }
+[data-scene="5"] .lykt-skin { opacity: 0.6; }
+
+/* ---------- Vêr ---------- */
+
+.regn {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: repeating-linear-gradient(
+    100deg,
+    transparent 0 22px,
+    rgba(210, 220, 235, 0.4) 22px 23px
+  );
+  transition: opacity 1.5s ease;
+  animation: regn 0.5s linear infinite;
+}
+
+[data-scene="4"] .regn {
+  opacity: 1;
+}
+
+.lyn {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-scene="4"] .lyn {
+  animation: lyn 1.2s ease-out 0.3s;
+}
+
+/* =========================================================
+   Teksten
+   ========================================================= */
+
+main {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hovud {
+  padding-top: 6vh;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--bodoni);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 10vw, 4.2rem);
+  line-height: 1.05;
+}
+
+.forfatter {
+  margin: 0.4rem 0 0;
+  color: var(--dempet);
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+.hint {
+  margin: 2rem 0 0;
+  color: var(--dempet);
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  animation: hint 2s ease-in-out infinite alternate;
+}
+
+.strofe {
+  margin: 0;
+  padding: 20vh 0;
+  font-size: clamp(1.3rem, 4.5vw, 1.6rem);
+  line-height: 1.6;
+  transition: opacity 0.8s ease;
+}
+
+/* Berre strofa som blir lesen er heilt tydeleg */
+.js .strofe {
+  opacity: 0.3;
+}
+
+.js .strofe.aktiv {
+  opacity: 1;
+}
+
+.slutt {
+  padding: 20vh 0 35vh;
+  text-align: center;
+}
+
+.slutt a {
+  color: var(--dempet);
+  font-style: italic;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.slutt a:hover {
+  color: var(--tekst);
+}
+
+/* =========================================================
+   Animasjonar
+   ========================================================= */
+
+@keyframes flyt {
+  to { transform: translateX(var(--periode)); }
+}
+
+@keyframes duv {
+  from { transform: rotate(calc(var(--duv) * -1deg)) translateY(-2px); }
+  to { transform: rotate(calc(var(--duv) * 1deg)) translateY(3px); }
+}
+
+@keyframes blink {
+  to { opacity: 0.2; }
+}
+
+@keyframes sprut {
+  from {
+    opacity: 0.9;
+    transform: translate(0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(16px, -28px);
+  }
+}
+
+@keyframes regn {
+  to { background-position: -24px 140px; }
+}
+
+@keyframes lyn {
+  0%, 100% { opacity: 0; }
+  6% { opacity: 0.85; }
+  14% { opacity: 0; }
+  22% { opacity: 0.5; }
+  40% { opacity: 0; }
+}
+
+@keyframes hint {
+  to { transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,487 @@
+/* Då eg var liten og lite visste... – to visningar av same dikt:
+   [data-visning="skrivebok"]  Skulebok med lærarretting i raudt (standard)
+   [data-visning="glidar"]     Før og etter: dra mellom bjørkeskogen og fjøset */
+
+:root {
+  --rad: 2.2rem;           /* avstand mellom linjene i skriveboka */
+  --blyant: #2b3a67;
+  --raudpenn: #d12a2a;
+
+  --barn: "Gochi Hand", "Comic Sans MS", cursive;
+  --laerar: "Caveat", cursive;
+  --slab: "Zilla Slab", Georgia, serif;
+  --ui: system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- Topplinja (felles) ---------- */
+
+.topplinje {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  font-family: var(--ui);
+  font-size: 0.9rem;
+  backdrop-filter: blur(6px);
+}
+
+.tilbake {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.tilbake:hover {
+  opacity: 1;
+}
+
+.veljar {
+  display: flex;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.veljar button {
+  font: inherit;
+  padding: 0.3rem 0.9rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.veljar button[aria-pressed="true"] {
+  color: var(--knapp-aktiv-tekst);
+  background: var(--knapp-aktiv);
+}
+
+.tilbake:focus-visible,
+.veljar button:focus-visible,
+.handtak:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ---------- Felles ---------- */
+
+.del {
+  margin: 0;
+}
+
+.linje {
+  display: block;
+}
+
+/* Det som berre høyrer til den eine visninga */
+[data-visning="skrivebok"] .bilete,
+[data-visning="skrivebok"] .skiljeline,
+[data-visning="skrivebok"] .handtak,
+[data-visning="glidar"] .krusedull,
+[data-visning="glidar"] .karakter {
+  display: none;
+}
+
+/* Fargeblyant-teikningane */
+.dull-sol { fill: #ffd23f; stroke: #f4a300; stroke-width: 3; }
+.dull-strek { fill: none; stroke: #333; stroke-width: 2.5; stroke-linecap: round; }
+.dull-strek.tjukk { stroke-width: 5; }
+.dull-krone { fill: #79c34f; stroke: #4f9a2f; stroke-width: 3; }
+.dull-stamme { fill: #fff; stroke: #333; stroke-width: 3; }
+.dull-gras { fill: #8cc56b; }
+.da-himmel { fill: #bfe2f6; }
+.da-sky { fill: #fff; stroke: #9cc7dd; stroke-width: 3; }
+.da-busk { fill: #5aa83c; stroke: #3f8a26; stroke-width: 3; }
+.da-blom { fill: #e84a6f; }
+.da-blom.gul { fill: #ffd23f; }
+
+/* =========================================================
+   1. SKRIVEBOK
+   ========================================================= */
+
+[data-visning="skrivebok"] {
+  --knapp-aktiv: #fdfcf6;
+  --knapp-aktiv-tekst: #4a3322;
+  background:
+    repeating-linear-gradient(92deg, rgba(0, 0, 0, 0.06) 0 2px, transparent 2px 38px),
+    #7a5538;
+  color: var(--blyant);
+}
+
+[data-visning="skrivebok"] .topplinje {
+  background: rgba(74, 51, 34, 0.85);
+  color: #fdfcf6;
+}
+
+[data-visning="skrivebok"] .ark {
+  position: relative;
+  margin: 1.5rem max(0.5rem, (100% - 42rem) / 2) 3rem;
+  padding: calc(var(--rad) * 2) 1.25rem calc(var(--rad) * 2) 4.6rem;
+  background:
+    /* hol for ringpermen */
+    radial-gradient(circle at 1.5rem 18%, #5e412b 0 0.55rem, transparent 0.6rem),
+    radial-gradient(circle at 1.5rem 50%, #5e412b 0 0.55rem, transparent 0.6rem),
+    radial-gradient(circle at 1.5rem 82%, #5e412b 0 0.55rem, transparent 0.6rem),
+    /* raud marglinje */
+    linear-gradient(to right, transparent 3.6rem, #e8a0a0 3.6rem calc(3.6rem + 2px), transparent calc(3.6rem + 2px)),
+    /* blå linjer */
+    repeating-linear-gradient(to bottom, transparent 0 calc(var(--rad) - 1px), #b7c9e8 calc(var(--rad) - 1px) var(--rad)),
+    #fdfcf6;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  font-family: var(--barn);
+  font-size: 1.5rem;
+  line-height: var(--rad);
+}
+
+[data-visning="skrivebok"] h1 {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 400;
+  line-height: var(--rad);
+}
+
+[data-visning="skrivebok"] .forfatter {
+  margin: 0 0 var(--rad);
+  font-size: 1.25rem;
+}
+
+.krusedull {
+  float: right;
+  width: 8rem;
+  margin: 0 0 0 0.75rem;
+  transform: rotate(4deg);
+}
+
+[data-visning="skrivebok"] .scene {
+  position: static;
+}
+
+[data-visning="skrivebok"] .panel {
+  display: contents;
+}
+
+/* Skriv på annakvar linje – då er det plass til rettingane */
+[data-visning="skrivebok"] .linje {
+  margin-bottom: var(--rad);
+}
+
+/* Læraren ringar inn bokmålsorda og skriv rett form over */
+[data-visning="skrivebok"] .rett {
+  --forseinking: 2.5s;
+  position: relative;
+}
+
+[data-visning="skrivebok"] .rett:nth-child(2) {
+  --forseinking: 3.6s;
+}
+
+[data-visning="skrivebok"] .rett::before {
+  content: "";
+  position: absolute;
+  inset: 0.15em -0.3em 0.05em;
+  border: 2px solid var(--raudpenn);
+  border-radius: 50%;
+  transform: rotate(-4deg);
+  animation: ring 0.6s ease-out var(--forseinking) both;
+}
+
+[data-visning="skrivebok"] .rett::after {
+  content: attr(data-rett);
+  position: absolute;
+  left: 50%;
+  bottom: 95%;
+  transform: translateX(-40%) rotate(-6deg);
+  color: var(--raudpenn);
+  font-family: var(--laerar);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1;
+  white-space: nowrap;
+  animation: skriv 0.5s ease calc(var(--forseinking) + 0.5s) both;
+}
+
+.karakter {
+  clear: both;
+  margin: 0;
+  color: var(--raudpenn);
+  font-family: var(--laerar);
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: var(--rad);
+  transform: rotate(-3deg);
+  transform-origin: left center;
+  animation: skriv 0.8s ease 5.2s both;
+}
+
+@media (max-width: 560px) {
+  [data-visning="skrivebok"] .ark {
+    padding-left: 3.6rem;
+    font-size: 1.3rem;
+    background:
+      linear-gradient(to right, transparent 2.8rem, #e8a0a0 2.8rem calc(2.8rem + 2px), transparent calc(2.8rem + 2px)),
+      repeating-linear-gradient(to bottom, transparent 0 calc(var(--rad) - 1px), #b7c9e8 calc(var(--rad) - 1px) var(--rad)),
+      #fdfcf6;
+  }
+
+  .krusedull {
+    width: 5.5rem;
+  }
+}
+
+/* =========================================================
+   2. FØR OG ETTER
+   ========================================================= */
+
+[data-visning="glidar"] {
+  --knapp-aktiv: #fff7ec;
+  --knapp-aktiv-tekst: #1b1a22;
+  background: #1b1a22;
+  color: #fff7ec;
+}
+
+[data-visning="glidar"] .topplinje {
+  background: rgba(27, 26, 34, 0.85);
+}
+
+[data-visning="glidar"] .ark {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 2.5rem;
+}
+
+[data-visning="glidar"] .hovud {
+  text-align: center;
+}
+
+[data-visning="glidar"] h1 {
+  margin: 0;
+  font-family: var(--slab);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  line-height: 1.15;
+}
+
+[data-visning="glidar"] .forfatter {
+  margin: 0.3rem 0 1rem;
+  font-family: var(--slab);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+[data-visning="glidar"] .scene {
+  position: relative;
+  height: min(76vh, 40rem);
+  min-height: 360px;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  cursor: ew-resize;
+}
+
+[data-visning="glidar"] .panel {
+  position: absolute;
+  inset: 0;
+}
+
+.bilete {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* «Då» ligg øvst og blir klipt bort etter kvart som ein drar */
+[data-visning="glidar"] .panel-da {
+  z-index: 2;
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+[data-visning="glidar"] .del {
+  position: absolute;
+  max-width: 44%;
+  font-size: clamp(1.15rem, 2.6vw, 1.9rem);
+  line-height: 1.35;
+}
+
+[data-visning="glidar"] .del-da {
+  top: 6%;
+  left: 5%;
+  padding: 0.4em 0.7em;
+  border-radius: 10px;
+  background: rgba(255, 253, 244, 0.8);
+  color: var(--blyant);
+  font-family: var(--barn);
+  transform: rotate(-2deg);
+}
+
+[data-visning="glidar"] .del-no {
+  right: 5%;
+  bottom: 8%;
+  text-align: right;
+  color: #fff7ec;
+  font-family: var(--slab);
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.skiljeline {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 3px;
+  transform: translateX(-50%);
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.handtak {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: clamp(28px, var(--pos), 100% - 28px);
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #1b1a22;
+  font-size: 1.6rem;
+  line-height: 1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  cursor: grab;
+  touch-action: none;
+  animation: puls 1.6s ease-in-out infinite;
+}
+
+.handtak:active {
+  cursor: grabbing;
+}
+
+.handtak span {
+  display: inline-block;
+}
+
+/* Pulsen stoppar når nokon har teke i handtaket */
+.brukt .handtak {
+  animation: none;
+}
+
+/* Geita */
+.geit-horn { fill: none; stroke: #8a7d6b; stroke-width: 5; stroke-linecap: round; }
+.geit-ore,
+.geit-skjegg { fill: #d8d0c2; }
+.geit-hovud { fill: #ece7dd; }
+.geit-auge { fill: #222; }
+.stjerner { fill: #fff; opacity: 0.8; }
+
+.geit {
+  animation: kikk 7s ease-in-out infinite;
+}
+
+.geit-auge ellipse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blunk 4s infinite;
+}
+
+/* Smal skjerm: glidaren går loddrett, «då» øvst og «no» nedst */
+@media (max-width: 640px) {
+  [data-visning="glidar"] .scene {
+    height: min(78vh, 44rem);
+    cursor: ns-resize;
+  }
+
+  [data-visning="glidar"] .panel-da {
+    clip-path: inset(0 0 calc(100% - var(--pos)) 0);
+  }
+
+  [data-visning="glidar"] .del {
+    max-width: none;
+    left: 5%;
+    right: 5%;
+  }
+
+  [data-visning="glidar"] .del-da {
+    top: 4%;
+  }
+
+  [data-visning="glidar"] .del-no {
+    bottom: 5%;
+  }
+
+  .skiljeline {
+    top: var(--pos);
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 3px;
+    transform: translateY(-50%);
+  }
+
+  .handtak {
+    top: clamp(28px, var(--pos), 100% - 28px);
+    left: 50%;
+  }
+
+  .handtak span {
+    transform: rotate(90deg);
+  }
+}
+
+/* =========================================================
+   Animasjonar
+   ========================================================= */
+
+@keyframes ring {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes skriv {
+  from { opacity: 0; }
+}
+
+@keyframes puls {
+  50% { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0.25), 0 4px 16px rgba(0, 0, 0, 0.45); }
+}
+
+@keyframes kikk {
+  0%, 100% { transform: translateX(-12px); }
+  20%, 75% { transform: translateX(0); }
+}
+
+@keyframes blunk {
+  0%, 90%, 100% { transform: scaleY(1); }
+  94% { transform: scaleY(0.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

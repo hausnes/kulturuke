@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="nn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Det lyriske hjørna</title>
+  <meta name="description" content="Ein samling favorittdikt – i skjønn foreining med CSS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Karla:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topp">
+    <p class="overtittel">Kulturuke</p>
+    <h1>Det lyriske hjørna</h1>
+    <p class="ingress">Nokre favorittar, kvar med si eiga drakt (CSS). Vel det du ynskjer!</p>
+  </header>
+
+  <main>
+    <section class="filter" aria-label="Filtrer dikt">
+      <div class="filter-gruppe">
+        <span class="filter-etikett" id="kategori-etikett">Kategori</span>
+        <div class="chips" id="kategorier" role="group" aria-labelledby="kategori-etikett"></div>
+      </div>
+      <div class="filter-gruppe">
+        <label class="filter-etikett" for="forfatter">Forfattar</label>
+        <select id="forfatter">
+          <option value="">Alle forfattarar</option>
+        </select>
+      </div>
+    </section>
+
+    <p class="antall" id="antall" aria-live="polite"></p>
+
+    <ul class="diktliste" id="diktliste"></ul>
+
+    <noscript>
+      <p class="tom">Startsida treng JavaScript for å vise dikta.</p>
+    </noscript>
+  </main>
+
+  <footer class="bunn">
+    <p>Samla med kjærleik og humor.</p>
+  </footer>
+</body>
+</html>

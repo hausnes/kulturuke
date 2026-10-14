@@ -1,0 +1,315 @@
+/* Moderne vossastubb – sida blir fullare jo lenger ein les.
+   script.js set --rus (0–1) og --fylle (0–1) på <html> etter kva strofe som blir lesen,
+   og klassane .dans, .gele, .kraup, .dunk og .velt for dei store augneblinka. */
+
+@property --rus {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --fylle {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+:root {
+  --ol: #f6c56b;
+  --tekst: #f3e6cc;
+  --dempet: #c9b48f;
+
+  --gotisk: "Grenze Gotisch", Georgia, serif;
+  --vollkorn: "Vollkorn", Georgia, serif;
+
+  transition:
+    --rus 1.8s ease,
+    --fylle 1.8s ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #160c06;
+  color: var(--tekst);
+  font-family: var(--vollkorn);
+}
+
+.tilbake {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 4;
+  color: var(--ol);
+  font-family: system-ui, sans-serif;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.tilbake:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ---------- Bakgrunn ---------- */
+
+/* Ølstova: blir rødare og meir mettar jo meir rus */
+.stove {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, #6b3f1d, #2a170b 60%, #160c06);
+  filter:
+    hue-rotate(calc(var(--rus) * -25deg))
+    saturate(calc(1 + var(--rus) * 0.9));
+}
+
+.fjell {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 30vh;
+}
+
+.fjell-bak { fill: #3a2617; }
+.fjell-fram { fill: #22150c; }
+.vatn { fill: #4a6b78; opacity: 0.6; }
+
+/* «men fjella kring Vangen, dei danste med» */
+.dans .fjell-bak,
+.dans .fjell-fram {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: dans 0.6s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -0.1s);
+}
+
+/* Fyllesjuka legg seg som eit grått, grønleg slør over alt */
+.fyllesjuke {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(90, 100, 85, 0.55), rgba(20, 22, 18, 0.95));
+  opacity: var(--fylle);
+}
+
+.dunk .fyllesjuke {
+  animation: dunk-slor 0.9s ease-out infinite;
+}
+
+/* ---------- Teksten ---------- */
+
+main {
+  position: relative;
+  z-index: 2;
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 0 1rem 30vh;
+  text-align: center;
+  font-size: clamp(1.15rem, 4vw, 1.4rem);
+  line-height: 1.6;
+  /* Dobbeltsyn */
+  text-shadow: calc(var(--rus) * 7px) calc(var(--rus) * 2px) 0 rgba(243, 230, 204, calc(var(--rus) * 0.45));
+  /* Vagging */
+  animation: vagg 3.2s ease-in-out infinite alternate;
+}
+
+.hovud {
+  padding-top: 14vh;
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--gotisk);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 10vw, 4.6rem);
+  line-height: 1.05;
+  color: var(--ol);
+}
+
+.forfatter {
+  margin: 0.8rem auto 0;
+  max-width: 26rem;
+  color: var(--dempet);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+.hint {
+  margin: 2.5rem 0 0;
+  color: var(--dempet);
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.strofe {
+  margin: 0;
+  padding: 16vh 0;
+  transition: opacity 0.8s ease;
+}
+
+/* Strofene ein ikkje les, flyt ut i tåka */
+.js .strofe:not(.aktiv) {
+  opacity: 0.35;
+  filter: blur(calc(var(--rus) * 2.5px));
+}
+
+/* «til føtene blei som gelé og deig» */
+.gele .strofe.aktiv {
+  animation: gele 1.1s ease-in-out infinite alternate;
+}
+
+/* «Heimatt eg kraup …» */
+.kraup .strofe.aktiv {
+  animation: kryp 2.4s ease-in-out infinite alternate;
+}
+
+/* «I hausen min hamra det …» */
+.dunk .strofe.aktiv {
+  animation: dunk 0.9s ease-out infinite;
+}
+
+.moral {
+  margin-top: 10vh;
+  padding: 1.5rem 1.25rem;
+  border: 2px solid var(--ol);
+  border-radius: 10px;
+  background: rgba(22, 12, 6, 0.7);
+}
+
+.moral-tittel {
+  font-family: var(--gotisk);
+  font-size: 1.6em;
+  color: var(--ol);
+}
+
+/* ---------- Krusteljaren ---------- */
+
+.krus {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 3;
+  width: 6rem;
+  text-align: center;
+  color: var(--ol);
+}
+
+.krus svg {
+  display: block;
+  width: 4.5rem;
+  margin: 0 auto;
+  transition: transform 1.2s cubic-bezier(.5, 0, .3, 1.3);
+}
+
+.krus-hank,
+.krus-glas {
+  fill: none;
+  stroke: var(--tekst);
+  stroke-width: 4;
+}
+
+.krus-ol { fill: #d98e2b; }
+.krus-skum { fill: #fff6e0; }
+
+.krus-innhald {
+  transform-box: view-box;
+  transform-origin: 34px 92px;
+  transform: scaleY(0);
+}
+
+/* Nytt krus: fyll opp, så drikk det nesten tomt */
+.skjenk .krus-innhald {
+  animation: skjenk 3.5s ease forwards;
+}
+
+.krus-tal {
+  margin: 0.3rem 0 0;
+  font-style: italic;
+  font-size: 0.9rem;
+  text-shadow: 0 1px 4px #000;
+}
+
+/* Når han ligg i veggrøfta, ligg kruset òg */
+.velt .krus svg {
+  transform: rotate(95deg) translateX(18px);
+}
+
+@media (max-width: 560px) {
+  .krus {
+    width: 4.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+  }
+
+  .krus svg {
+    width: 3.2rem;
+  }
+
+  .krus-tal {
+    font-size: 0.75rem;
+  }
+}
+
+/* ---------- Animasjonar ---------- */
+
+@keyframes vagg {
+  from { transform: rotate(calc(var(--rus) * -2.5deg)) translateX(calc(var(--rus) * -14px)); }
+  to { transform: rotate(calc(var(--rus) * 2.5deg)) translateX(calc(var(--rus) * 14px)); }
+}
+
+@keyframes dans {
+  from { transform: skewX(-9deg) scaleY(0.88); }
+  to { transform: skewX(9deg) scaleY(1.12); }
+}
+
+@keyframes gele {
+  from { transform: skewX(-12deg) scaleY(0.88); }
+  to { transform: skewX(12deg) scaleY(1.08); }
+}
+
+@keyframes kryp {
+  from { transform: translate(-14px, 12px) rotate(-6deg); }
+  to { transform: translate(14px, 18px) rotate(-3deg); }
+}
+
+@keyframes dunk {
+  0% { transform: scale(1.07); }
+  35% { transform: scale(1); }
+}
+
+@keyframes dunk-slor {
+  0% { transform: scale(0.92); }
+  35% { transform: scale(1); }
+}
+
+@keyframes skjenk {
+  0% { transform: scaleY(0); }
+  22% { transform: scaleY(1); }
+  100% { transform: scaleY(0.18); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .skjenk .krus-innhald {
+    transform: scaleY(0.5);
+  }
+}

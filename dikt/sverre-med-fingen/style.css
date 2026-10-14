@@ -1,0 +1,477 @@
+/* Sverre med fingen – to visningar av same dikt:
+   [data-visning="vise"]  Skillingsvise på gulna papir (standard)
+   [data-visning="veg"]   Ned bygda, langs ein svingete veg til kyrkja */
+
+:root {
+  --papir: #efe2c2;
+  --blekk: #2a1f16;
+  --raudt: #8b1a1a;
+  --stempel: #b3121b;
+
+  --fell: "IM Fell English", Georgia, serif;
+  --fell-sc: "IM Fell English SC", Georgia, serif;
+  --fraktur: "UnifrakturMaguntia", Georgia, serif;
+  --alegreya: "Alegreya", Georgia, serif;
+  --ui: system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- Topplinja (felles) ---------- */
+
+.topplinje {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  font-family: var(--ui);
+  font-size: 0.9rem;
+  backdrop-filter: blur(6px);
+}
+
+.tilbake {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.tilbake:hover {
+  opacity: 1;
+}
+
+.veljar {
+  display: flex;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.veljar button {
+  font: inherit;
+  padding: 0.3rem 0.9rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.veljar button[aria-pressed="true"] {
+  color: var(--knapp-aktiv-tekst);
+  background: var(--knapp-aktiv);
+}
+
+.tilbake:focus-visible,
+.veljar button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ---------- Felles oppbygging ---------- */
+
+.ark {
+  position: relative;
+}
+
+.hovud,
+.strofer,
+.fot {
+  position: relative;
+  z-index: 1;
+}
+
+.strofe {
+  position: relative;
+  margin: 0;
+}
+
+/* Strofene kjem fram når ein scrollar (berre når JavaScript køyrer) */
+.js .strofe {
+  opacity: 0;
+  transition:
+    opacity 1.2s ease,
+    transform 1s cubic-bezier(.2, .7, .2, 1),
+    filter 1.2s ease;
+}
+
+.js .strofe.synleg {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Det som berre høyrer til den eine visninga */
+[data-visning="vise"] .vegen,
+[data-visning="vise"] .hus,
+[data-visning="vise"] .kyrkje,
+[data-visning="veg"] .undertittel,
+[data-visning="veg"] .melodi,
+[data-visning="veg"] .prenta,
+[data-visning="veg"] .stempel {
+  display: none;
+}
+
+/* =========================================================
+   1. SKILLINGSVISE
+   ========================================================= */
+
+[data-visning="vise"] {
+  --knapp-aktiv: var(--papir);
+  --knapp-aktiv-tekst: var(--blekk);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #3d3129, transparent 70%),
+    #221b17;
+  color: var(--blekk);
+  font-family: var(--fell);
+}
+
+[data-visning="vise"] .topplinje {
+  background: rgba(34, 27, 23, 0.85);
+  color: var(--papir);
+}
+
+[data-visning="vise"] .ark {
+  max-width: 40rem;
+  margin: 1.5rem auto 4rem;
+  padding: 3.5rem clamp(1.25rem, 7vw, 4rem) 2.5rem;
+  background:
+    radial-gradient(ellipse at 15% 8%, rgba(255, 255, 255, 0.4), transparent 45%),
+    radial-gradient(ellipse at 85% 95%, rgba(120, 80, 30, 0.22), transparent 55%),
+    radial-gradient(circle at 78% 34%, rgba(140, 100, 40, 0.1) 0 3.5rem, transparent 3.6rem),
+    radial-gradient(ellipse at 0% 50%, rgba(120, 80, 30, 0.15), transparent 30%),
+    var(--papir);
+  box-shadow: 0 14px 50px rgba(0, 0, 0, 0.6);
+  font-size: 1.2rem;
+}
+
+/* Trykt ramme rundt arket */
+[data-visning="vise"] .ark::before {
+  content: "";
+  position: absolute;
+  inset: 0.8rem;
+  border: 4px double var(--blekk);
+  pointer-events: none;
+}
+
+[data-visning="vise"] .hovud {
+  text-align: center;
+}
+
+[data-visning="vise"] .undertittel {
+  max-width: 26rem;
+  margin: 0 auto 1rem;
+  font-family: var(--fell-sc);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+}
+
+[data-visning="vise"] h1 {
+  margin: 0;
+  font-family: var(--fraktur);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 11vw, 4.4rem);
+  line-height: 1.05;
+}
+
+[data-visning="vise"] .forfatter,
+[data-visning="vise"] .melodi {
+  margin: 0.4rem 0 0;
+  font-style: italic;
+}
+
+[data-visning="vise"] .melodi {
+  font-size: 0.9rem;
+}
+
+[data-visning="vise"] .hovud::after {
+  content: "— ❦ —";
+  display: block;
+  margin: 1.5rem 0 2rem;
+  font-size: 1.3rem;
+}
+
+[data-visning="vise"] .strofer {
+  display: grid;
+  justify-content: center;
+  padding-left: 1.6em;
+}
+
+[data-visning="vise"] .strofe {
+  margin-bottom: 1.4em;
+  line-height: 1.55;
+  filter: blur(3px);
+}
+
+/* Stor raud førstebokstav */
+[data-visning="vise"] .strofe:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.1em 0 0;
+  font-family: var(--fraktur);
+  font-size: 3.7em;
+  line-height: 0.8;
+  color: var(--raudt);
+}
+
+/* Peikefingeren i margen */
+[data-visning="vise"] .peik {
+  position: relative;
+}
+
+[data-visning="vise"] .peik::before {
+  content: "☞";
+  position: absolute;
+  left: -1.6em;
+  top: -0.05em;
+  font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Apple Symbols", sans-serif;
+  color: var(--raudt);
+}
+
+/* Sjalusi og blodhevn: raud trykkfarge */
+[data-visning="vise"] .blod {
+  color: var(--raudt);
+}
+
+/* Gravferda: sørgerand */
+[data-visning="vise"] .sorg {
+  margin: 0.6em -1.3em 1.8em;
+  padding: 0.9em 1.2em;
+  border: 5px solid var(--blekk);
+  box-shadow:
+    inset 0 0 0 2px var(--papir),
+    inset 0 0 0 3px var(--blekk);
+}
+
+[data-visning="vise"] .sorg .peik::before {
+  left: -2.9em;
+}
+
+[data-visning="vise"] .fot {
+  position: static;
+  text-align: center;
+}
+
+[data-visning="vise"] .prenta {
+  margin: 1.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--blekk);
+  font-family: var(--fell-sc);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+/* Stempelet har sin eigen plass under siste strofe, så det dekkjer ikkje teksten */
+.stempel {
+  display: inline-block;
+  margin: 0.8em 0 1em;  /* luft nok til at det skrå stempelet ikkje når opp i verset */
+  padding: 0.05em 0.35em;
+  border: 5px solid currentColor;
+  border-radius: 8px;
+  color: var(--stempel);
+  font-family: "Arial Black", Impact, var(--ui);
+  font-size: clamp(2rem, 10vw, 3.6rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  opacity: 0;
+  transform: rotate(-14deg);
+}
+
+.skandale .stempel {
+  opacity: 0.85;
+  animation: stemple 0.35s cubic-bezier(.5, 0, .9, .4) both;
+}
+
+.skandale[data-visning="vise"] .ark {
+  animation: rist 0.4s ease-out 0.3s;
+}
+
+@keyframes stemple {
+  from {
+    opacity: 0;
+    transform: scale(2.8) rotate(-4deg);
+  }
+}
+
+@keyframes rist {
+  25% { transform: translate(-3px, 2px); }
+  50% { transform: translate(3px, -1px); }
+  75% { transform: translate(-1px, 1px); }
+}
+
+/* =========================================================
+   2. NED BYGDA
+   ========================================================= */
+
+[data-visning="veg"] {
+  --knapp-aktiv: #1f2d3a;
+  --knapp-aktiv-tekst: #fff;
+  background: linear-gradient(
+    to bottom,
+    #a9d8ea 0%,
+    #cfe9c4 12%,
+    #e9e2a8 30%,
+    #f2b979 46%,
+    #c9605a 58%,
+    #6a3b63 70%,
+    #26213d 82%,
+    #121020 100%
+  );
+  color: #1f2d3a;
+  font-family: var(--alegreya);
+}
+
+[data-visning="veg"] .topplinje {
+  background: rgba(255, 255, 255, 0.6);
+  color: #1f2d3a;
+}
+
+[data-visning="veg"] .ark {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.vegen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.veg-kant,
+.veg-sti {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.veg-kant {
+  stroke: #6d5a3e;
+  stroke-width: 30;
+}
+
+.veg-sti {
+  stroke: #cdb382;
+  stroke-width: 22;
+}
+
+.granar use {
+  fill: #2f5b3a;
+}
+
+[data-visning="veg"] .hovud {
+  text-align: center;
+}
+
+.hus {
+  display: block;
+  width: 110px;
+  margin: 0 auto 0.5rem;
+}
+
+.hus-tak { fill: #3b2a24; }
+.hus-vegg { fill: #a8322d; }
+.hus-vindauge { fill: #f6e7b0; stroke: #fff; stroke-width: 2; }
+.hus-dør { fill: #3b2a24; }
+
+[data-visning="veg"] h1 {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  line-height: 1.1;
+}
+
+[data-visning="veg"] .forfatter {
+  margin: 0.3rem 0 0;
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+[data-visning="veg"] .strofer {
+  margin-top: 16vh;
+}
+
+[data-visning="veg"] .strofe {
+  width: min(100% - 2.5rem, 22rem);
+  margin-bottom: 24vh;
+  padding: 1.1rem 1.4rem;
+  border-radius: 10px;
+  background: rgba(255, 251, 242, 0.93);
+  color: #2a2420;
+  box-shadow: 0 8px 24px rgba(20, 15, 30, 0.25);
+  font-size: 1.2rem;
+  line-height: 1.55;
+}
+
+[data-visning="veg"] .strofe:nth-child(odd) {
+  margin-left: auto;
+  transform: translateX(40px);
+}
+
+[data-visning="veg"] .strofe:nth-child(even) {
+  margin-right: auto;
+  transform: translateX(-40px);
+}
+
+[data-visning="veg"] .blod {
+  border-left: 5px solid #a3242b;
+}
+
+[data-visning="veg"] .sorg,
+[data-visning="veg"] .siste {
+  background: rgba(24, 21, 36, 0.92);
+  color: #ece6f0;
+}
+
+[data-visning="veg"] .fot {
+  text-align: center;
+}
+
+.kyrkje {
+  display: block;
+  width: 170px;
+  margin: 0 auto;
+}
+
+.kyrkje-tak { fill: #4a3b45; }
+.kyrkje-vegg { fill: #f3efe6; }
+.kyrkje-vindauge { fill: #2a2638; transition: fill 1.5s ease; }
+.kyrkje-dør { fill: #5a3d2b; }
+
+/* Når siste strofe er lesen, lyser det i kyrkja */
+.skandale .kyrkje-vindauge {
+  fill: #ffd27a;
+}
+
+.skandale .kyrkje {
+  filter: drop-shadow(0 0 18px rgba(255, 210, 122, 0.5));
+}
+
+/* ---------- Utan rørsle ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

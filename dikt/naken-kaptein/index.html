@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="nn" data-scene="1">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naken kaptein – Jon Hjørnevik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,700&family=Crimson+Pro:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="tilbake" href="../../">← Alle dikt</a>
+
+  <!-- Scena står fast øvst og skiftar tilstand etter kva strofe som blir lesen (data-scene på <html>) -->
+  <div class="scene" aria-hidden="true">
+    <div class="himmel himmel-kveld"></div>
+    <div class="himmel himmel-storm"></div>
+    <div class="himmel himmel-morgon"></div>
+
+    <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMax slice">
+      <circle class="sol sol-kveld" cx="620" cy="232" r="34"/>
+      <circle class="sol sol-morgon" cx="170" cy="222" r="28"/>
+
+      <g class="bolgjer bolgjer-bak">
+        <path d="M-800 252 Q -750.0 232 -700 252 T -600 252 T -500 252 T -400 252 T -300 252 T -200 252 T -100 252 T 0 252 T 100 252 T 200 252 T 300 252 T 400 252 T 500 252 T 600 252 T 700 252 T 800 252 T 900 252 T 1000 252 T 1100 252 T 1200 252 T 1300 252 T 1400 252 T 1500 252 T 1600 252 L 1600 400 L -800 400 Z"/>
+      </g>
+
+      <g class="glitter">
+        <rect x="585" y="262" width="60" height="2"/>
+        <rect x="600" y="272" width="40" height="2"/>
+        <rect x="575" y="284" width="70" height="2"/>
+      </g>
+
+      <g class="skip-snu">
+        <g class="skip">
+          <!-- Masta med segl og vimpel -->
+          <g class="mast">
+            <rect class="mast-stong" x="430" y="128" width="7" height="142"/>
+            <path class="vimpel" d="M437 130 L470 138 L437 146 Z"/>
+            <path class="segl" d="M437 150 Q 512 196 437 258 Z"/>
+          </g>
+
+          <rect class="styrhus" x="300" y="236" width="72" height="34"/>
+          <rect class="styrhus-vindauge" x="310" y="244" width="14" height="10"/>
+          <rect class="styrhus-vindauge" x="332" y="244" width="14" height="10"/>
+          <rect class="styrhus-vindauge" x="354" y="244" width="10" height="10"/>
+
+          <!-- Kapteinen, med lua på -->
+          <g class="kaptein">
+            <circle cx="480" cy="248" r="6"/>
+            <rect x="476" y="254" width="8" height="15" rx="3"/>
+            <rect class="lue" x="473" y="239" width="14" height="5" rx="2"/>
+          </g>
+
+          <!-- Lykta på hekken -->
+          <circle class="lykt-skin" cx="266" cy="240" r="22"/>
+          <rect class="lykt-stong" x="264" y="244" width="4" height="26"/>
+          <circle class="lykt" cx="266" cy="240" r="6"/>
+
+          <path class="skrog" d="M258 268 L542 268 L520 318 L280 318 Z"/>
+          <path class="rekke" d="M262 268 L540 268"/>
+          <path class="baugport" d="M542 268 L590 262 L520 318 Z"/>
+
+          <g class="sprut">
+            <circle cx="575" cy="288" r="4"/>
+            <circle cx="585" cy="292" r="3"/>
+            <circle cx="565" cy="294" r="3.5"/>
+            <circle cx="592" cy="286" r="2.5"/>
+            <circle cx="570" cy="284" r="2"/>
+          </g>
+        </g>
+      </g>
+
+      <g class="bolgjer bolgjer-fram">
+        <path d="M-800 304 Q -760.0 280 -720 304 T -640 304 T -560 304 T -480 304 T -400 304 T -320 304 T -240 304 T -160 304 T -80 304 T 0 304 T 80 304 T 160 304 T 240 304 T 320 304 T 400 304 T 480 304 T 560 304 T 640 304 T 720 304 T 800 304 T 880 304 T 960 304 T 1040 304 T 1120 304 T 1200 304 T 1280 304 T 1360 304 T 1440 304 T 1520 304 T 1600 304 L 1600 400 L -800 400 Z"/>
+      </g>
+    </svg>
+
+    <div class="regn"></div>
+    <div class="lyn"></div>
+  </div>
+
+  <main>
+    <header class="hovud">
+      <h1>Naken kaptein</h1>
+      <p class="forfatter">Jon Hjørnevik</p>
+      <p class="hint">Rull ned ↓</p>
+    </header>
+
+    <p class="strofe" data-scene="1">
+      Ho låg med baugporten open,<br>
+      skinkene skein,<br>
+      der stod eg,<br>
+      ein naken kaptein.
+    </p>
+    <p class="strofe" data-scene="2">
+      Eg kjende lukt av sjømat,<br>
+      og masta stod bein,<br>
+      alt låg til rette<br>
+      for ein naken kaptein.
+    </p>
+    <p class="strofe" data-scene="3">
+      Eg drøymde om seglas,<br>
+      og sjøsprut som stod,<br>
+      ein naken kaptein<br>
+      var klar for fjære og flo.
+    </p>
+    <p class="strofe" data-scene="4">
+      Men så gjekk baugporten ned<br>
+      framfor ein naken kaptein,<br>
+      masta ramla saman,<br>
+      og kapteinen han grein.
+    </p>
+    <p class="strofe" data-scene="5">
+      Men med baugporten nede<br>
+      er det håp i ein hekk,<br>
+      ein naken kaptein<br>
+      gjekk inn bakre dekk.
+    </p>
+
+    <p class="slutt"><a href="#">↑ Tilbake til hamna</a></p>
+  </main>
+</body>
+</html>

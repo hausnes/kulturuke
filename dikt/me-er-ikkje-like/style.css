@@ -1,0 +1,284 @@
+/* Me er ikkje like. – frå høgtid til Hardanger.
+   Heile forteljinga er tidsstyrt med CSS-animasjonar.
+   Endre tidspunkta under for å justere dramaturgien. */
+
+:root {
+  --t-tittel: 0.3s;
+  --t-l1: 2.2s;
+  --t-l2: 5s;
+  --t-l3: 7.8s;
+  --t-slag: 9.8s;  /* Kinsarvik! */
+
+  --natt: #0d0c12;
+  --tekst: #f5efe6;
+  --dempet: #b9afc0;
+  --saum: #fff7ec;
+  --bloming: #f9d3dc;
+  --gloe: #f29bb0;
+
+  --serif: "EB Garamond", Georgia, serif;
+  --display: "Abril Fatface", Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--natt);
+  color: var(--tekst);
+  font-family: var(--serif);
+  line-height: 1.6;
+}
+
+/* ---------- Kulissar ---------- */
+
+.hardanger {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #1b1d48 0%,
+    #3d2f66 30%,
+    #8c4f7a 52%,
+    #e0806c 64%,
+    #f6bd8a 72%
+  );
+}
+
+.fjell {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 42vh;
+  animation: fjell-reis 2.4s cubic-bezier(.2, .7, .2, 1) var(--t-slag) both;
+}
+
+.fjell-bak { fill: #3a3768; }
+.isbre { fill: #e9e4f2; }
+.fjell-fram { fill: #1c1a3a; }
+.fjord { fill: #26275a; }
+
+.glitter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 9vh;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 7px,
+    rgba(246, 189, 138, 0.35) 7px 8px
+  );
+  mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent);
+  animation:
+    fjell-reis 2.4s cubic-bezier(.2, .7, .2, 1) var(--t-slag) both,
+    glitre 4s ease-in-out calc(var(--t-slag) + 2.4s) infinite alternate;
+}
+
+/* Natta ligg over alt fram til slaget */
+.natt {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 70% 50% at 50% 20%, #1c1a26, var(--natt) 70%);
+  opacity: 0;
+  animation: natt-forsvinn 1.6s ease-in var(--t-slag) both;
+}
+
+/* ---------- Eplebløming ---------- */
+
+.bloming {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bloming span {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  width: calc(14px * var(--k));
+  height: calc(11px * var(--k));
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, #fff, var(--bloming) 60%, var(--gloe));
+  opacity: 0.9;
+  animation: dal var(--s) linear calc(var(--t-slag) + var(--d)) infinite both;
+}
+
+/* ---------- Teksten ---------- */
+
+.tilbake {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 1.5rem 1rem 0;
+  color: var(--dempet);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.tilbake:hover {
+  color: var(--tekst);
+}
+
+article {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+  margin: 10vh auto 0;
+  padding: 0 1rem 45vh;
+  text-align: center;
+  text-shadow: 0 2px 14px rgba(13, 12, 30, 0.7);
+}
+
+h1 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  animation: inn 2s ease var(--t-tittel) both;
+}
+
+.forfatter {
+  margin: 0.3rem 0 3rem;
+  color: var(--dempet);
+  font-style: italic;
+  animation: inn 2s ease calc(var(--t-tittel) + 0.8s) both;
+}
+
+.dikt {
+  margin: 0;
+  font-size: clamp(1.25rem, 4.2vw, 1.7rem);
+}
+
+.linje {
+  display: block;
+  margin-bottom: 0.6em;
+}
+
+.l1 { animation: inn 2.2s ease var(--t-l1) both; }
+.l2 { animation: inn 2.2s ease var(--t-l2) both; }
+.l3 { animation: inn 1.6s ease var(--t-l3) both; }
+
+.stad {
+  display: block;
+  margin-top: 0.2em;
+  font-family: var(--display);
+  font-size: clamp(3rem, 14vw, 7rem);
+  line-height: 1.1;
+  color: #fff3e2;
+  text-shadow:
+    0 0 24px rgba(242, 155, 176, 0.8),
+    0 4px 0 #8c4f7a,
+    0 8px 30px rgba(13, 12, 30, 0.6);
+  animation: triumf 1.4s cubic-bezier(.3, 1.6, .5, 1) var(--t-slag) both;
+}
+
+/* Hardangersaum: kryssmønster i kvitt, som ein bord over og under */
+.saum {
+  display: block;
+  width: min(100%, 26rem);
+  height: 16px;
+  margin: 0.15em auto;
+  border-block: 2px solid var(--saum);
+  background-image:
+    linear-gradient(45deg, transparent 40%, var(--saum) 40% 60%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, var(--saum) 40% 60%, transparent 60%);
+  background-size: 12px 12px;
+  background-position: center;
+  filter: drop-shadow(0 2px 6px rgba(13, 12, 30, 0.5));
+  animation: saum-ut 1.2s ease-out calc(var(--t-slag) + 0.9s) both;
+}
+
+.igjen {
+  display: inline-block;
+  margin-top: 3rem;
+  color: var(--tekst);
+  font-style: italic;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  animation: inn 1.5s ease calc(var(--t-slag) + 3.5s) both;
+}
+
+.tilbake:focus-visible,
+.igjen:focus-visible {
+  outline: 2px solid var(--saum);
+  outline-offset: 4px;
+}
+
+/* ---------- Animasjonar ---------- */
+
+@keyframes inn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(4px);
+  }
+}
+
+@keyframes natt-forsvinn {
+  from { opacity: 1; }
+}
+
+@keyframes fjell-reis {
+  from { transform: translateY(60%); }
+}
+
+@keyframes glitre {
+  to { opacity: 0.4; background-position: 0 4px; }
+}
+
+@keyframes triumf {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-8deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12) rotate(2deg);
+  }
+}
+
+@keyframes saum-ut {
+  from { transform: scaleX(0); }
+}
+
+@keyframes dal {
+  0% {
+    transform: translate(0, -5vh) rotate(0deg);
+  }
+  25% {
+    transform: translate(4vw, 25vh) rotate(90deg);
+  }
+  50% {
+    transform: translate(-3vw, 55vh) rotate(200deg);
+  }
+  75% {
+    transform: translate(5vw, 80vh) rotate(290deg);
+  }
+  100% {
+    transform: translate(0, 105vh) rotate(400deg);
+  }
+}
+
+/* Utan rørsle: hopp rett til sluttbiletet */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
+
+  .bloming {
+    display: none;
+  }
+}
